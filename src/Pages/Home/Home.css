@@ -1,0 +1,13 @@
+.hero_section {
+  background: url("../../Assets/Air_Home_banner1.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 50vh;
+}
+
+.card_section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
