@@ -1,0 +1,126 @@
+.booking-container .upper-content-container {
+  background: #034;
+  height: 15vh;
+  padding: 2rem 0;
+}
+
+.lower-content-container {
+  width: 80%;
+  margin: 2rem auto;
+  /* flex-direction: column; */
+  position: relative;
+  top: -10%;
+}
+
+.left-content-container {
+  width: 70%;
+  flex-direction: column;
+}
+
+.right-content-container {
+  width: 25%;
+  flex-direction: column;
+  position: sticky;
+  top: 10%;
+}
+
+.flight-details-container,
+.contact-information-container,
+.traveller-details-container {
+  width: 100%;
+  margin: 0 auto;
+  /* border: 1px solid gray; */
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 5px;
+  /* height: 30vh; */
+  border-radius: 6px;
+}
+
+.traveller-details {
+  padding: 1rem;
+  flex-direction: column;
+}
+
+.details-heading {
+  background: #034;
+  color: #fff;
+  padding: 0.5rem 1rem;
+}
+
+.details-heading h4 {
+  font-size: 1.2rem;
+}
+
+.passenger-form {
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 1rem;
+}
+
+.input-fields {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  width: 95%;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(128, 128, 128, 0.372);
+}
+
+.input-fields select {
+  border: none;
+  outline: none;
+}
+
+.input-fields input {
+  border: none;
+  outline: none;
+}
+
+.contact-information {
+  flex-direction: column;
+}
+
+.fare-breakup-container {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 5px;
+  /* width:; */
+  /* height: 30vh; */
+}
+
+.fare-details {
+  flex-direction: column;
+}
+
+.price-divide {
+  flex-direction: column;
+  width: 100%;
+}
+
+.price-divide hr {
+  margin: 0.5rem 0;
+}
+
+.discount-offer-container,
+.coupons-container {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 5px;
+  /* height: 15vh; */
+  color: blue;
+}
+
+@media screen and (max-width: 1250px) {
+  .lower-content-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .left-content-container {
+    width: 100%;
+  }
+
+  .right-content-container {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width:900px) {
+    .passenger-form {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

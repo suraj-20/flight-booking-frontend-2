@@ -1,6 +1,10 @@
 .footer_section {
     background: #d4dde8;
     /* height: 50vh; */
+    /* position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0; */
 }
 
 .footer-container {

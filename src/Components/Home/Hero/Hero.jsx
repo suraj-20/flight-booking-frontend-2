@@ -1,5 +1,6 @@
 import React from "react";
 import "./Hero.css";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -76,13 +77,15 @@ const Hero = () => {
               />
             </div>
             <div class="col-1 search-btn">
-              <button
-                style={{ borderBottomRightRadius: "10px" }}
-                type="submit"
-                className="btn custom-search-btn"
-              >
-                Search
-              </button>
+              <Link to={"/flightdetails"}>
+                <button
+                  style={{ borderBottomRightRadius: "10px" }}
+                  type="submit"
+                  className="btn custom-search-btn"
+                >
+                  Search
+                </button>
+              </Link>
             </div>
           </div>
         </div>

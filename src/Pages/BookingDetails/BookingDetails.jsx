@@ -1,11 +1,13 @@
-import React from 'react'
+import React from "react";
+import "./BookingDetails.css";
+import Booking from "../../Components/Booking/Booking";
 
 const BookingDetails = () => {
   return (
-    <div>
-      booking
+    <div className="booking_section">
+      <Booking />
     </div>
-  )
-}
+  );
+};
 
-export default BookingDetails
+export default BookingDetails;

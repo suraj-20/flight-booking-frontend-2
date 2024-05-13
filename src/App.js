@@ -5,6 +5,8 @@ import FlightDetails from "./Pages/FlightDetails/FlightDetails.jsx";
 import BookingDetails from "./Pages/BookingDetails/BookingDetails.jsx";
 import Navbar from "./Components/Home/Navbar/Navbar.jsx";
 import Footer from "./Components/Home/Footer/Footer.jsx";
+import LoginSignup from "./Pages/Login/LoginSignup.jsx";
+import MyTrips from "./Pages/MyTrips/MyTrips.jsx";
 
 function App() {
   return (
@@ -12,6 +14,8 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />}></Route>
+        <Route path="/login" element={<LoginSignup />}></Route>
+        <Route path="/mytrips" element={<MyTrips />}></Route>
         <Route path="/flightdetails" element={<FlightDetails />}></Route>
         <Route path="/bookingdetails" element={<BookingDetails />}></Route>
       </Routes>
