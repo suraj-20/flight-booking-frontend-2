@@ -104,6 +104,12 @@
   color: blue;
 }
 
+.contact-content-container .row {
+  position: relative;
+  left: 10px;
+  width: 100%;
+}
+
 @media screen and (max-width: 1250px) {
   .lower-content-container {
     flex-direction: column;

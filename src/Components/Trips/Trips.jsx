@@ -8,7 +8,7 @@ const Trips = () => {
         <div className="myTrip-heading">
           <h2>My Trips</h2>
         </div>
-        <div className="myTrip-content-container">
+        <div className="myTrip-content-container" style={{ overflowX: "auto" }}>
           <table>
             <tr>
               <th>Order ID</th>

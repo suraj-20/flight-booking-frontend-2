@@ -1,26 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Hero.css";
 import { Link } from "react-router-dom";
+import { DatePicker } from "rsuite";
 
 const Hero = () => {
+  const [isOneWay, setIsOneWay] = useState(true);
+  const [numAdults, setNumAdults] = useState(1);
+  const [numChildren, setNumChildren] = useState(0);
+  const [numInfants, setNumInfants] = useState(0);
+  const [showPassengerOption, setShowPassengerOption] = useState(false);
+
+  const handleToggleFlightType = (value) => {
+    setIsOneWay(value === "one-way");
+  };
+
+  const handleToggleShowPassenger = () => {
+    setShowPassengerOption(!showPassengerOption);
+  };
+
+  const handlePassengerChange = (type, increment) => {
+    switch (type) {
+      case "adults":
+        setNumAdults(Math.max(numAdults + increment, 0));
+        break;
+      case "children":
+        setNumChildren(Math.max(numChildren + increment, 0));
+        break;
+      case "infants":
+        setNumInfants(Math.max(numInfants + increment, 0));
+        break;
+      default:
+        break;
+    }
+  };
+
+  const preventDefaultAction = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div className="hero-container d-flex align-items-center justify-content-center h-100">
       <div className="search-box search-container w-80">
         <div className="upper-content way-of-flight p-2">
           <div className="round-trip">
             <button
-              className="btn"
-              //   className={!isOneWay ? "active" : ""}
-              //   onClick={() => handleToggleFlightType("round-trip")}
-            >
-              Round trip
-            </button>
-            <button
-              className="btn"
-              //   className={isOneWay ? "active" : ""}
-              //   onClick={() => handleToggleFlightType("one-way")}
+              className={isOneWay ? "active" : ""}
+              onClick={() => handleToggleFlightType("one-way")}
             >
               One way
+            </button>
+            <button
+              className={!isOneWay ? "active" : ""}
+              onClick={() => handleToggleFlightType("round-trip")}
+            >
+              Round trip
             </button>
           </div>
         </div>
@@ -29,8 +62,8 @@ const Hero = () => {
           style={{ borderBottom: "1px solid rgba(128, 128, 128, 0.495)" }}
         ></div>
         <div className="lower-content input-contents">
-          <div class="input-text-area d-lg-flex d-grid align-items-start">
-            <div class="col-2 input-field">
+          <div className="input-text-area d-lg-flex d-grid align-items-start">
+            <div className="col-2 input-field">
               <input
                 style={{ borderBottomLeftRadius: "10px" }}
                 className="form-control custom-form-input"
@@ -40,7 +73,7 @@ const Hero = () => {
                 id=""
               />
             </div>
-            <div class="col-2 input-field">
+            <div className="col-2 input-field">
               <input
                 className="form-control custom-form-input"
                 placeholder="Destination"
@@ -49,34 +82,116 @@ const Hero = () => {
                 id=""
               />
             </div>
-            <div class="col-2 input-field">
-              <input
-                className="form-control custom-form-input"
-                placeholder="Departure"
-                type="date"
-                name=""
-                id=""
+            <div className="col-2 input-field">
+              <DatePicker
+                placeholder="Departure Date"
+                className="form-control custom-date-input"
               />
             </div>
             <div class="col-2 input-field">
-              <input
-                className="form-control custom-form-input"
-                placeholder="Return"
-                type="date"
-                name=""
-                id=""
+              <DatePicker
+                placeholder="Return Date"
+                className="form-control custom-date-input"
+                disabled={isOneWay}
               />
             </div>
-            <div class="col-2 input-field">
+            <div
+              className="col-2 input-field"
+              style={{ position: "relative", height: "4rem" }}
+            >
               <input
+                style={{ position: "absolute" }}
+                onClick={handleToggleShowPassenger}
+                onChange={handlePassengerChange}
                 className="form-control custom-form-input"
                 placeholder="1 Treveller(s), Economy"
                 type="text"
                 name=""
                 id=""
               />
+              {showPassengerOption && (
+                <div className="passenger-options">
+                  <div className="passenger-type">
+                    <label>Adults:</label>
+                    <div className="addOrSubBtn">
+                      <button
+                        onClick={(e) => {
+                          preventDefaultAction(e);
+                          handlePassengerChange("adults", -1);
+                        }}
+                      >
+                        -
+                      </button>
+                      <span>{numAdults}</span>
+                      <button
+                        onClick={(e) => {
+                          preventDefaultAction(e);
+                          handlePassengerChange("adults", 1);
+                        }}
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                  <div className="passenger-type">
+                    <label>Children:</label>
+                    <div className="addOrSubBtn">
+                      <button
+                        onClick={(e) => {
+                          preventDefaultAction(e);
+                          handlePassengerChange("children", -1);
+                        }}
+                      >
+                        -
+                      </button>
+                      <span>{numChildren}</span>
+                      <button
+                        onClick={(e) => {
+                          preventDefaultAction(e);
+                          handlePassengerChange("children", 1);
+                        }}
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                  <div className="passenger-type">
+                    <label>Infants:</label>
+                    <div className="addOrSubBtn">
+                      <button
+                        onClick={(e) => {
+                          preventDefaultAction(e);
+                          handlePassengerChange("infants", -1);
+                        }}
+                      >
+                        -
+                      </button>
+                      <span>{numInfants}</span>
+                      <button
+                        onClick={(e) => {
+                          preventDefaultAction(e);
+                          handlePassengerChange("infants", 1);
+                        }}
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                  <div className="fligh-class-dropdown">
+                    <select
+                      className="dropdown-flight-class"
+                      aria-label="Default select example"
+                    >
+                      <option value="Economy">Economy</option>
+                      <option value="1">Premium Economy</option>
+                      <option value="2">Business</option>
+                      <option value="3">First</option>
+                    </select>
+                  </div>
+                </div>
+              )}
             </div>
-            <div class="col-1 search-btn">
+            <div className="col-1 search-btn">
               <Link to={"/flightdetails"}>
                 <button
                   style={{ borderBottomRightRadius: "10px" }}

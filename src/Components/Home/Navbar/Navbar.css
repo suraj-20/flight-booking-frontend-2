@@ -67,3 +67,17 @@
   border: none;
   outline: none;
 }
+
+@media screen and (max-width: 600px) {
+  .nav-logo img {
+    width: 90%;
+  }
+
+  .nav-container {
+    width: 95%;
+  }
+
+  .custom-btn {
+    padding: 0 0.6rem;
+  }
+}
