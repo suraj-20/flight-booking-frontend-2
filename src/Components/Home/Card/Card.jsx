@@ -11,11 +11,11 @@ const cardObj = [
     card_image: image1,
   },
   {
-    id: 1,
+    id: 2,
     card_image: image2,
   },
   {
-    id: 1,
+    id: 3,
     card_image: image3,
   },
 ];
@@ -26,8 +26,8 @@ const Card = () => {
       <div className="card-container card d-grid">
         {cardObj.map((card) => {
           return (
-            <Link to={"/"}>
-              <div key={card.id} className="card-image d-flex">
+            <Link key={card.id} to={"/"}>
+              <div className="card-image d-flex">
                 <img src={card.card_image} alt="" />
               </div>
             </Link>

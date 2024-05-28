@@ -21,9 +21,9 @@ const Navbar = () => {
               My Trips
             </button>
           </Link>
-          <div class="dropdown">
-            <button class="btn custom-btn dropbtn">Contact Us</button>
-            <div class="dropdown-content">
+          <div className="dropdown">
+            <button className="btn custom-btn dropbtn">Contact Us</button>
+            <div className="dropdown-content">
               <a href="#link 1" className="d-flex align-items-center gap-2">
                 <IoCall />
                 8287146841

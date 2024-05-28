@@ -88,7 +88,7 @@ const Hero = () => {
                 className="form-control custom-date-input"
               />
             </div>
-            <div class="col-2 input-field">
+            <div className="col-2 input-field">
               <DatePicker
                 placeholder="Return Date"
                 className="form-control custom-date-input"
@@ -192,7 +192,7 @@ const Hero = () => {
               )}
             </div>
             <div className="col-1 search-btn">
-              <Link to={"/flightdetails"}>
+              <Link to={"#"}>
                 <button
                   style={{ borderBottomRightRadius: "10px" }}
                   type="submit"
