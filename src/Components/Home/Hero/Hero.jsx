@@ -3,12 +3,10 @@ import "./Hero.css";
 import { Link, useNavigate } from "react-router-dom";
 import { DatePicker } from "rsuite";
 
-const Hero = ({ flightDetails, setFligthDetails }) => {
+const Hero = ({ flightDetails, setFligthDetails, setSearchResults }) => {
   const [isOneWay, setIsOneWay] = useState(true);
   const [showPassengerOption, setShowPassengerOption] = useState(false);
   const navigate = useNavigate();
-
-  console.log(flightDetails);
 
   const handleChange = (e) => {
     setFligthDetails({ ...flightDetails, [e.target.name]: e.target.value });
@@ -73,8 +71,9 @@ const Hero = ({ flightDetails, setFligthDetails }) => {
 
       if (responseData.message) {
         alert(responseData.message);
-        window.location.replace("/flightdetails");
-        // navigate("/flightdetails");
+        // window.location.replace("/flightdetails");
+        setSearchResults(responseData);
+        navigate("/flightdetails");
       } else {
         alert(responseData.message);
       }
@@ -115,7 +114,7 @@ const Hero = ({ flightDetails, setFligthDetails }) => {
           <div className="input-text-area d-lg-flex d-grid align-items-start">
             <div className="col-2 input-field">
               <input
-                value={flightDetails?.origin}
+                value={flightDetails.origin}
                 onChange={handleChange}
                 style={{ borderBottomLeftRadius: "10px" }}
                 className="form-control custom-form-input"
@@ -127,7 +126,7 @@ const Hero = ({ flightDetails, setFligthDetails }) => {
             </div>
             <div className="col-2 input-field">
               <input
-                value={flightDetails?.destination}
+                value={flightDetails.destination}
                 onChange={handleChange}
                 className="form-control custom-form-input"
                 placeholder="Destination"

@@ -24,6 +24,8 @@ function App() {
     },
   });
 
+  const [searchResults, setSearchResults] = useState({});
+
   return (
     <BrowserRouter>
       <Navbar />
@@ -34,12 +36,16 @@ function App() {
             <Home
               flightDetails={flightDetails}
               setFligthDetails={setFligthDetails}
+              setSearchResults={setSearchResults}
             />
           }
         ></Route>
         <Route path="/login" element={<LoginSignup />}></Route>
         <Route path="/mytrips" element={<MyTrips />}></Route>
-        <Route path="/flightdetails" element={<FlightDetails />}></Route>
+        <Route
+          path="/flightdetails"
+          element={<FlightDetails searchResults={searchResults} />}
+        ></Route>
         <Route path="/bookingdetails" element={<BookingDetails />}></Route>
         <Route path="/paymentgateway" element={<PaymentGateway />}></Route>
       </Routes>

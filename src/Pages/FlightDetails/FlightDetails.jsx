@@ -4,14 +4,17 @@ import Hero from "../../Components/Home/Hero/Hero";
 import Flights from "../../Components/Flights/FlightsDetails/Flights";
 import ReviewSection from "../../Components/Home/ReviewsSection/ReviewSection";
 
-const FlightDetails = () => {
+const FlightDetails = ({ searchResults }) => {
   return (
     <div className="flight-details-page">
-      <section className="modify_section">
-        <Hero />
-      </section>
+      {/* <section className="modify_section">
+        <Hero
+          flightDetails={flightDetails}
+          setFligthDetails={setFligthDetails}
+        />
+      </section> */}
       <section className="filter_section_or_flights_details">
-        <Flights />
+        <Flights searchResults={searchResults} />
       </section>
       <section className="reviewAndStarSection">
         <ReviewSection />

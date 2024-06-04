@@ -5,7 +5,7 @@ import SubHeader from "../../Components/Home/SubHeader/SubHeader";
 import Card from "../../Components/Home/Card/Card";
 import ReviewSection from "../../Components/Home/ReviewsSection/ReviewSection";
 
-const home = ({ flightDetails, setFligthDetails }) => {
+const home = ({ flightDetails, setFligthDetails, setSearchResults }) => {
   console.log(flightDetails);
   return (
     <div className="home_page">
@@ -13,6 +13,7 @@ const home = ({ flightDetails, setFligthDetails }) => {
         <Hero
           flightDetails={flightDetails}
           setFligthDetails={setFligthDetails}
+          setSearchResults={setSearchResults}
         />
       </section>
       <section className="subHeader-section">
