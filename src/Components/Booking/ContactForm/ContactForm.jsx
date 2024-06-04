@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { MdContacts } from "react-icons/md";
 
-const ContactForm = () => {
-  const [updateFormData, setUpdateFormData] = useState({
-    country: "India",
-    state: "",
-    city: "",
-    pincode: "",
-  });
+const ContactForm = ({updateFormData,setUpdateFormData}) => {
+
 
   const [userDetails, setUserDetails] = useState("");
 
@@ -16,38 +11,6 @@ const ContactForm = () => {
     // console.log(e.target.value);
   };
 
-  const updateUser = async () => {
-    // console.log("User signed in", formData);
-    try {
-      if (localStorage.getItem("token")) {
-        let responseData;
-        console.log(process.env.REACT_APP_BASE_URL);
-        await fetch(` http://localhost:8000/api/v1/user/updateInfo`, {
-          method: "PUT",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updateFormData),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-          })
-          .catch((error) => console.log(error));
-
-        // if (responseData.message) {
-        //   localStorage.setItem("token", responseData.token);
-        //   alert(responseData.message);
-        //   window.location.replace("/login");
-        // } else {
-        //   alert(responseData.message);
-        // }
-      }
-    } catch (error) {
-      console.error("Error in user signed in.", error);
-    }
-  };
 
   // const updateUserDetails = (async) => {
   //   if (localStorage.getItem("token")) {
@@ -96,9 +59,6 @@ const ContactForm = () => {
       </div>
       <div className="passenger-details">
         <form
-          onClick={() => {
-            updateUser();
-          }}
           className="passenger-form contact-form d-grid"
         >
           <div className="input-fields">

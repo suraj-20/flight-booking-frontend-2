@@ -56,6 +56,13 @@ function App() {
     __v: 0,
   });
 
+  const [updateFormData, setUpdateFormData] = useState({
+    country: "India",
+    state: "",
+    city: "",
+    pincode: "",
+  });
+
   return (
     <BrowserRouter>
       <Navbar />
@@ -78,7 +85,7 @@ function App() {
         ></Route>
         <Route
           path="/bookingdetails"
-          element={<BookingDetails selectedFlight={selectedFlight} />}
+          element={<BookingDetails selectedFlight={selectedFlight} updateFormData={updateFormData} setUpdateFormData={setUpdateFormData} />}
         ></Route>
         <Route path="/paymentgateway" element={<PaymentGateway />}></Route>
       </Routes>
