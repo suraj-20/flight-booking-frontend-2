@@ -72,7 +72,7 @@ const Hero = ({ flightDetails, setFligthDetails, setSearchResults }) => {
       if (responseData.message) {
         alert(responseData.message);
         // window.location.replace("/flightdetails");
-        setSearchResults(responseData);
+        setSearchResults(responseData.fliterFlight);
         navigate("/flightdetails");
       } else {
         alert(responseData.message);
