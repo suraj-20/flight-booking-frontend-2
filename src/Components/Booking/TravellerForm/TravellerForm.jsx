@@ -30,12 +30,12 @@ const TravellerForm = ({
       {Array.from({ length: flightDetails.total_Passenger }).map(
         (passenger, index) => (
           <>
-            <div key={index} className="type-of-passenger">
+            {/* <div key={index} className="type-of-passenger">
               <h6>
                 {index + 1}. {index === 0 ? "Adult" : "Passenger"}
               </h6>
-            </div>
-            <div className="passenger-details">
+            </div> */}
+            <div key={index} className="passenger-details">
               <form className="passenger-form d-grid">
                 <div className="input-fields">
                   <label htmlFor="title">Title</label>

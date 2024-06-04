@@ -64,6 +64,8 @@ const Hero = ({ flightDetails, setFligthDetails, setSearchResults }) => {
         ),
       };
 
+      setFligthDetails(flightDetails);
+
       const response = await fetch(
         `http://localhost:8000/api/v1/searchFlights`,
         {
