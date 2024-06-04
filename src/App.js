@@ -8,7 +8,7 @@ import Footer from "./Components/Home/Footer/Footer.jsx";
 import LoginSignup from "./Pages/Login/LoginSignup.jsx";
 import MyTrips from "./Pages/MyTrips/MyTrips.jsx";
 import PaymentGateway from "./Pages/PaymentGateway/PaymentGateway.jsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const [flightDetails, setFligthDetails] = useState({
@@ -20,9 +20,11 @@ function App() {
     passenger: {
       adult: 1,
       children: 0,
-      infants: 0,
+      infants: 0
     },
+    total_Passenger:1
   });
+
 
   const [searchResults, setSearchResults] = useState([
     {
