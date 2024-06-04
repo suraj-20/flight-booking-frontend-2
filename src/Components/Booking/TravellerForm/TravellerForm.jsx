@@ -1,18 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { IoBagRemoveSharp } from "react-icons/io5";
 
-const TravellerForm = ({ flightDetails, passengerDetails, setPassengerDetails }) => {
+const TravellerForm = ({
+  flightDetails,
+  passengerDetails,
+  setPassengerDetails,
+}) => {
   console.log({ flightDetails });
 
   useEffect(() => {
     // Create an array of objects based on the numberOfPassengers
-    const initialPassengerDetails = Array.from({ length: flightDetails.total_Passenger }, () => ({
-      title: "",
-      first_name: "",
-      last_name: "",
-      age: "",
-      gender: "",
-    }));
+    const initialPassengerDetails = Array.from(
+      { length: flightDetails.total_Passenger },
+      () => ({
+        title: "",
+        first_name: "",
+        last_name: "",
+        age: "",
+        gender: "",
+      })
+    );
 
     setPassengerDetails(initialPassengerDetails);
   }, [flightDetails.total_Passenger, setPassengerDetails]);
@@ -20,11 +27,14 @@ const TravellerForm = ({ flightDetails, passengerDetails, setPassengerDetails })
   const handleChange = (index, event) => {
     const { name, value } = event.target;
     const updatedPassengerDetails = [...passengerDetails];
-    updatedPassengerDetails[index] = { ...updatedPassengerDetails[index], [name]: value };
+    updatedPassengerDetails[index] = {
+      ...updatedPassengerDetails[index],
+      [name]: value,
+    };
     setPassengerDetails(updatedPassengerDetails);
   };
 
-  console.log(passengerDetails)
+  console.log(passengerDetails);
 
   return (
     <div className="traveller-details d-flex gap-2">
@@ -37,9 +47,7 @@ const TravellerForm = ({ flightDetails, passengerDetails, setPassengerDetails })
       {passengerDetails.map((passenger, index) => (
         <React.Fragment key={index}>
           <div className="type-of-passenger">
-            <h6>
-              {index + 1}. Passenger
-            </h6>
+            <h6>{index + 1}. Passenger</h6>
           </div>
           <div className="passenger-details">
             <form className="passenger-form d-grid">

@@ -64,13 +64,15 @@ function App() {
     pincode: "",
   });
 
-  const [passengerDetails, setPassengerDetails] = useState([{
-    title: "",
-    first_name: "",
-    last_name: "",
-    age: "",
-    gender: "",
-  }]);
+  const [passengerDetails, setPassengerDetails] = useState([
+    {
+      title: "",
+      first_name: "",
+      last_name: "",
+      age: "",
+      gender: "",
+    },
+  ]);
 
   return (
     <BrowserRouter>
