@@ -5,9 +5,9 @@ import SubHeader from "../../Components/Home/SubHeader/SubHeader";
 import Card from "../../Components/Home/Card/Card";
 import ReviewSection from "../../Components/Home/ReviewsSection/ReviewSection";
 
-const home = ({ flightDetails, setFligthDetails, setSearchResults }) => {
-  // console.log(flightDetails);
-  return (
+const Home = ({ flightDetails, setFligthDetails, setSearchResults }) => {
+
+    return (
     <div className="home_page">
       <section className="hero_section">
         <Hero
@@ -29,4 +29,4 @@ const home = ({ flightDetails, setFligthDetails, setSearchResults }) => {
   );
 };
 
-export default home;
+export default Home;
