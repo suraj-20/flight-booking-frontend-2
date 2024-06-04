@@ -55,8 +55,15 @@ const Hero = ({ flightDetails, setFligthDetails, setSearchResults }) => {
     // console.log("Flight searched");
 
     try {
+      flightDetails = {
+        ...flightDetails,
+        total_Passenger: Number(
+          flightDetails.passenger.adult +
+            flightDetails.passenger.children +
+            flightDetails.passenger.infants
+        ),
+      };
 
-      flightDetails = {...flightDetails,total_Passenger: Number(flightDetails.passenger.adult + flightDetails.passenger.children + flightDetails.passenger.infants)}
       const response = await fetch(
         `http://localhost:8000/api/v1/searchFlights`,
         {

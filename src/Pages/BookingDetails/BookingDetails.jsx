@@ -2,10 +2,24 @@ import React from "react";
 import "./BookingDetails.css";
 import Booking from "../../Components/Booking/Booking";
 
-const BookingDetails = ({ selectedFlight , updateFormData , setUpdateFormData }) => {
+const BookingDetails = ({
+  selectedFlight,
+  updateFormData,
+  setUpdateFormData,
+  flightDetails,
+  passengerDetails,
+  setPassengerDetails,
+}) => {
   return (
     <div className="booking_section">
-      <Booking selectedFlight={selectedFlight} updateFormData={updateFormData} setUpdateFormData={setUpdateFormData} />
+      <Booking
+        passengerDetails={passengerDetails}
+        setPassengerDetails={setPassengerDetails}
+        selectedFlight={selectedFlight}
+        updateFormData={updateFormData}
+        setUpdateFormData={setUpdateFormData}
+        flightDetails={flightDetails}
+      />
     </div>
   );
 };

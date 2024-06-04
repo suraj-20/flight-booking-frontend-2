@@ -20,11 +20,10 @@ function App() {
     passenger: {
       adult: 1,
       children: 0,
-      infants: 0
+      infants: 0,
     },
-    total_Passenger:1
+    total_Passenger: 1,
   });
-
 
   const [searchResults, setSearchResults] = useState([
     {
@@ -65,6 +64,14 @@ function App() {
     pincode: "",
   });
 
+  const [passengerDetails, setPassengerDetails] = useState({
+    title: "",
+    first_name: "",
+    last_name: "",
+    age: "",
+    gender: "",
+  });
+
   return (
     <BrowserRouter>
       <Navbar />
@@ -83,11 +90,25 @@ function App() {
         <Route path="/mytrips" element={<MyTrips />}></Route>
         <Route
           path="/flightdetails"
-          element={<FlightDetails searchResults={searchResults} setSelectedFlight={setSelectedFlight} />}
+          element={
+            <FlightDetails
+              searchResults={searchResults}
+              setSelectedFlight={setSelectedFlight}
+            />
+          }
         ></Route>
         <Route
           path="/bookingdetails"
-          element={<BookingDetails selectedFlight={selectedFlight} updateFormData={updateFormData} setUpdateFormData={setUpdateFormData} />}
+          element={
+            <BookingDetails
+              passengerDetails={passengerDetails}
+              setPassengerDetails={setPassengerDetails}
+              flightDetails={flightDetails}
+              selectedFlight={selectedFlight}
+              updateFormData={updateFormData}
+              setUpdateFormData={setUpdateFormData}
+            />
+          }
         ></Route>
         <Route path="/paymentgateway" element={<PaymentGateway />}></Route>
       </Routes>

@@ -1,20 +1,22 @@
 import React, { useState } from "react";
 import { IoBagRemoveSharp } from "react-icons/io5";
 
-const TravellerForm = () => {
-  const [passengerDetails, setPassengerDetails] = useState({
-    title: "",
-    first_name: "",
-    last_name: "",
-    email: "",
-    phone_number: "",
-  });
+const TravellerForm = ({
+  flightDetails,
+  passengerDetails,
+  setPassengerDetails,
+}) => {
+  console.log({ flightDetails });
 
-  const handleChange = (e) => {
-    setPassengerDetails({
-      ...passengerDetails,
-      [e.target.value]: e.target.name,
-    });
+  const handleChange = (e, index) => {
+    const updatedPassengerDetails = { ...passengerDetails };
+    updatedPassengerDetails[index] = {
+      ...updatedPassengerDetails[index],
+      [e.target.name]: e.target.value,
+    };
+    setPassengerDetails(updatedPassengerDetails);
+
+    console.log(setPassengerDetails);
   };
 
   return (
@@ -25,67 +27,77 @@ const TravellerForm = () => {
           Traveller Details
         </h4>
       </div>
-      <div className="type-of-passenger">
-        <h6>1. Adult</h6>
-      </div>
-      <div className="passenger-details">
-        <form className="passenger-form d-grid">
-          <div className="input-fields">
-            <label htmlFor="title">Title</label>
-            <select
-              value={passengerDetails.title}
-              onChange={handleChange}
-              name="title"
-              id=""
-            >
-              <option value="Title">Title</option>
-              <option value="Mr.">Mr.</option>
-              <option value="Mrs.">Mrs.</option>
-              <option value="Ms.">Ms.</option>
-            </select>
-          </div>
-          <div className="input-fields">
-            <label htmlFor="first_name">First Name *</label>
-            <input
-              value={passengerDetails.first_name}
-              onChange={handleChange}
-              type="text"
-              name="first_name"
-              id=""
-            />
-          </div>
-          <div className="input-fields">
-            <label htmlFor="last_name">Last Name *</label>
-            <input
-              value={passengerDetails.last_name}
-              onChange={handleChange}
-              type="text"
-              name="last_name"
-              id=""
-            />
-          </div>
-          <div className="input-fields">
-            <label htmlFor="email">Email Id *</label>
-            <input
-              value={passengerDetails.email}
-              onChange={handleChange}
-              type="email"
-              name="email"
-              id=""
-            />
-          </div>
-          <div className="input-fields">
-            <label htmlFor="phone_number">Phone no. *</label>
-            <input
-              value={passengerDetails.phone_number}
-              onChange={handleChange}
-              type="tel"
-              name="phone_number"
-              id=""
-            />
-          </div>
-        </form>
-      </div>
+      {Array.from({ length: flightDetails.total_Passenger }).map(
+        (passenger, index) => (
+          <>
+            <div key={index} className="type-of-passenger">
+              <h6>
+                {index + 1}. {index === 0 ? "Adult" : "Passenger"}
+              </h6>
+            </div>
+            <div className="passenger-details">
+              <form className="passenger-form d-grid">
+                <div className="input-fields">
+                  <label htmlFor="title">Title</label>
+                  <select
+                    value={passengerDetails.title}
+                    onChange={handleChange}
+                    name="title"
+                    id=""
+                  >
+                    <option value="Title">Title</option>
+                    <option value="Mr.">Mr.</option>
+                    <option value="Mrs.">Mrs.</option>
+                    <option value="Ms.">Ms.</option>
+                  </select>
+                </div>
+                <div className="input-fields">
+                  <label htmlFor="first_name">First Name *</label>
+                  <input
+                    value={passengerDetails.first_name}
+                    onChange={handleChange}
+                    type="text"
+                    name="first_name"
+                    id=""
+                  />
+                </div>
+                <div className="input-fields">
+                  <label htmlFor="last_name">Last Name *</label>
+                  <input
+                    value={passengerDetails.last_name}
+                    onChange={handleChange}
+                    type="text"
+                    name="last_name"
+                    id=""
+                  />
+                </div>
+                <div className="input-fields">
+                  <label htmlFor="email">Age *</label>
+                  <input
+                    value={passengerDetails.age}
+                    onChange={handleChange}
+                    type="tel"
+                    name="age"
+                    id=""
+                  />
+                </div>
+                <div className="input-fields">
+                  <label htmlFor="phone_number">Gender *</label>
+                  <select
+                    value={passengerDetails.gender}
+                    onChange={handleChange}
+                    name="gender"
+                    id=""
+                  >
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                  </select>
+                </div>
+              </form>
+            </div>
+          </>
+        )
+      )}
     </div>
   );
 };
