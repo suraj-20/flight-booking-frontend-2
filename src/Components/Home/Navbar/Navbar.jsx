@@ -8,6 +8,7 @@ import { FaFilePdf } from "react-icons/fa";
 import { FaUserCircle } from "react-icons/fa";
 
 const Navbar = () => {
+  
   const [userDetails, setUserDetails] = useState("");
 
   const fetchUserDetail = async () => {

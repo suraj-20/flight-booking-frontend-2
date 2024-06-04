@@ -6,7 +6,7 @@ import Card from "../../Components/Home/Card/Card";
 import ReviewSection from "../../Components/Home/ReviewsSection/ReviewSection";
 
 const home = ({ flightDetails, setFligthDetails, setSearchResults }) => {
-  console.log(flightDetails);
+  // console.log(flightDetails);
   return (
     <div className="home_page">
       <section className="hero_section">

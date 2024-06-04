@@ -2,10 +2,10 @@ import React from "react";
 import "./BookingDetails.css";
 import Booking from "../../Components/Booking/Booking";
 
-const BookingDetails = () => {
+const BookingDetails = ({ selectedFlight }) => {
   return (
     <div className="booking_section">
-      <Booking />
+      <Booking selectedFlight={selectedFlight} />
     </div>
   );
 };

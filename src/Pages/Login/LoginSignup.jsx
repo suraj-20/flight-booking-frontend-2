@@ -15,11 +15,11 @@ const LoginSignup = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    console.log(e.target.value);
+    // console.log(e.target.value);
   };
 
   const signup = async () => {
-    console.log("User signed in", formData);
+    // console.log("User signed in", formData);
     try {
       let responseData;
       console.log(process.env.REACT_APP_BASE_URL);
@@ -48,7 +48,7 @@ const LoginSignup = () => {
   };
 
   const login = async () => {
-    console.log("User logged in", formData);
+    // console.log("User logged in", formData);
 
     let responseData;
     // console.log(process.env.REACT_APP_BASE_URL);

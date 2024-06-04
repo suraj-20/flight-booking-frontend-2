@@ -12,11 +12,34 @@ import TravellerFilledForm from "./TravellerFilledForm/TravellerFilledForm";
 import FilledContactForm from "./FilledContactForm/FilledContactForm";
 // import { Link } from "react-router-dom";
 
-const Booking = () => {
+const Booking = ({ selectedFlight }) => {
+  console.log({ selectedFlight });
   const [showContent, setShowContent] = useState("page1");
 
   const handleToggleContent = (newContent) => {
     setShowContent(newContent);
+  };
+
+  const calTimeDiff = (departureDate, arrivalDate) => {
+    const departure = new Date(departureDate);
+    const arrival = new Date(arrivalDate);
+
+    const differenceInMilliseconds = arrival - departure;
+
+    const differenceInHours = differenceInMilliseconds / (1000 * 60 * 60);
+
+    return differenceInHours;
+  };
+
+  const getTimeInHoursAndMin = (dateString) => {
+    const date = new Date(dateString);
+
+    const hours = date.getUTCHours();
+    const minutes = date.getUTCMinutes();
+
+    const formattedTime = `${hours}:${minutes < 10 ? "0" : ""}${minutes}`;
+
+    return formattedTime;
   };
 
   return (
@@ -41,27 +64,35 @@ const Booking = () => {
                     <td className="d-flex gap-3">
                       <img src="" alt="" width={50} height={50} />
                       <h5>
-                        IndiGo <br /> <p>SG-4345</p>
+                        {selectedFlight.airline} <br />{" "}
+                        <p style={{ textTransform: "uppercase" }}>
+                          {selectedFlight.flight_number}
+                        </p>
                       </h5>
                     </td>
                     <td>
                       <p>
-                        23:00 <br /> New Delhi
+                        {getTimeInHoursAndMin(selectedFlight.departure_date)}{" "}
+                        <br /> {selectedFlight.departure_location}
                       </p>
                     </td>
                     <td>
                       <p>
-                        23:00 <br /> New Delhi
+                        {getTimeInHoursAndMin(selectedFlight.arrival_date)}{" "}
+                        <br /> {selectedFlight.arrival_location}
                       </p>
                     </td>
                     <td>
-                      <p>
-                        23:00 <br /> 0 stop
-                      </p>
+                      <p>{`${calTimeDiff(
+                        selectedFlight.departure_date,
+                        selectedFlight.arrival_date
+                      )} hours`}</p>
                     </td>
                     <td>
                       {" "}
-                      <h6 style={{ color: "red" }}>₹ 3500</h6>
+                      <h6
+                        style={{ color: "red" }}
+                      >{`₹ ${selectedFlight.price}`}</h6>
                     </td>
                   </tr>
                 </table>

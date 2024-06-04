@@ -52,7 +52,7 @@ const Hero = ({ flightDetails, setFligthDetails, setSearchResults }) => {
   };
 
   const handleSubmit = async () => {
-    console.log("Flight searched");
+    // console.log("Flight searched");
 
     try {
       const response = await fetch(
@@ -67,7 +67,7 @@ const Hero = ({ flightDetails, setFligthDetails, setSearchResults }) => {
         }
       );
       const responseData = await response.json();
-      console.log(responseData);
+      // console.log(responseData);
 
       if (responseData.message) {
         alert(responseData.message);

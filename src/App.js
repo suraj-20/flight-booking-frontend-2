@@ -24,26 +24,37 @@ function App() {
     },
   });
 
-  const [searchResults, setSearchResults] = useState(
+  const [searchResults, setSearchResults] = useState([
+    {
+      _id: "",
+      airline: "",
+      flight_number: "",
+      departure_location: "",
+      arrival_location: "",
+      departure_date: "",
+      arrival_date: "",
+      available_seats: 70,
+      price: 1999,
+      class_of_service: "",
+      created_at: "",
+      __v: 0,
+    },
+  ]);
 
-  [   
-       {
-        _id: "",
-        airline: "",
-        flight_number: "",
-        departure_location: "",
-        arrival_location: "",
-        departure_date: "",
-        arrival_date: "",
-        available_seats: 70,
-        price: 1999,
-        class_of_service: "",
-        created_at: "",
-        __v: 0,
-      },
-  ]
-
-  );
+  const [selectedFlight, setSelectedFlight] = useState({
+    _id: "",
+    airline: "",
+    flight_number: "",
+    departure_location: "",
+    arrival_location: "",
+    departure_date: "",
+    arrival_date: "",
+    available_seats: 70,
+    price: 1999,
+    class_of_service: "",
+    created_at: "",
+    __v: 0,
+  });
 
   return (
     <BrowserRouter>
@@ -63,9 +74,12 @@ function App() {
         <Route path="/mytrips" element={<MyTrips />}></Route>
         <Route
           path="/flightdetails"
-          element={<FlightDetails searchResults={searchResults} />}
+          element={<FlightDetails searchResults={searchResults} setSelectedFlight={setSelectedFlight} />}
         ></Route>
-        <Route path="/bookingdetails" element={<BookingDetails />}></Route>
+        <Route
+          path="/bookingdetails"
+          element={<BookingDetails selectedFlight={selectedFlight} />}
+        ></Route>
         <Route path="/paymentgateway" element={<PaymentGateway />}></Route>
       </Routes>
       <Footer />

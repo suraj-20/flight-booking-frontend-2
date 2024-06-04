@@ -1,7 +1,88 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { MdContacts } from "react-icons/md";
 
 const ContactForm = () => {
+  const [updateFormData, setUpdateFormData] = useState({
+    country: "India",
+    state: "",
+    city: "",
+    pincode: "",
+  });
+
+  const [userDetails, setUserDetails] = useState("");
+
+  const handleChange = (e) => {
+    setUpdateFormData({ ...updateFormData, [e.target.name]: e.target.value });
+    // console.log(e.target.value);
+  };
+
+  const updateUser = async () => {
+    // console.log("User signed in", formData);
+    try {
+      if (localStorage.getItem("token")) {
+        let responseData;
+        console.log(process.env.REACT_APP_BASE_URL);
+        await fetch(` http://localhost:8000/api/v1/user/updateInfo`, {
+          method: "PUT",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updateFormData),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((error) => console.log(error));
+
+        // if (responseData.message) {
+        //   localStorage.setItem("token", responseData.token);
+        //   alert(responseData.message);
+        //   window.location.replace("/login");
+        // } else {
+        //   alert(responseData.message);
+        // }
+      }
+    } catch (error) {
+      console.error("Error in user signed in.", error);
+    }
+  };
+
+  // const updateUserDetails = (async) => {
+  //   if (localStorage.getItem("token")) {
+  //     updateFormData();
+  //   }
+  // };
+
+  const fetchUserDetail = async () => {
+    if (localStorage.getItem("token")) {
+      fetchUserDetailApi();
+    }
+  };
+
+  function fetchUserDetailApi() {
+    try {
+      fetch(`http://localhost:8000/api/v1/user`, {
+        method: "GET",
+        headers: {
+          Authorization: `${localStorage.getItem("token")}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setUserDetails(data);
+          console.log(data);
+        })
+        .catch((error) => console.log(error));
+    } catch (error) {
+      console.error("Error in user Fetching.", error);
+    }
+  }
+
+  useEffect(() => {
+    fetchUserDetail();
+  }, []);
   return (
     <div
       className="contact-information d-flex gap-2"
@@ -14,28 +95,43 @@ const ContactForm = () => {
         </h4>
       </div>
       <div className="passenger-details">
-        <form className="passenger-form contact-form d-grid">
+        <form
+          onClick={() => {
+            updateUser();
+          }}
+          className="passenger-form contact-form d-grid"
+        >
           <div className="input-fields">
             <label htmlFor="">First Name *</label>
-            <input type="text" name="" id="" />
+            <input type="text" name="" id="" value={userDetails.first_name} />
           </div>
           <div className="input-fields">
             <label htmlFor="">Last Name *</label>
-            <input type="text" name="" id="" />
+            <input type="text" name="" id="" value={userDetails.last_name} />
           </div>
           <div className="input-fields">
             <label htmlFor="">Email Id *</label>
-            <input type="email" name="" id="" />
+            <input type="email" name="" id="" value={userDetails.email} />
           </div>
           <div className="input-fields">
-            <label htmlFor="">Country</label>
-            <select name="" id="">
-              <option value="1">India</option>
+            <label htmlFor="country">Country</label>
+            <select
+              value={updateFormData.country}
+              onChange={handleChange}
+              name="country"
+              id=""
+            >
+              <option value="India">India</option>
             </select>
           </div>
           <div className="input-fields">
             <label htmlFor="">State</label>
-            <select name="" id="">
+            <select
+              value={updateFormData.state}
+              onChange={handleChange}
+              name="state"
+              id=""
+            >
               <option value="0"></option>
               <option value=" Andhra Pradesh"> Andhra Pradesh</option>
               <option value=" Arunachal Pradesh"> Arunachal Pradesh</option>
@@ -73,15 +169,27 @@ const ContactForm = () => {
           </div>
           <div className="input-fields">
             <label htmlFor="">City *</label>
-            <input type="text" name="" id="" />
+            <input
+              type="text"
+              value={updateFormData.city}
+              onChange={handleChange}
+              name="city"
+              id=""
+            />
           </div>
           <div className="input-fields">
             <label htmlFor="">Pincode *</label>
-            <input type="tel" name="" id="" />{" "}
+            <input
+              type="tel"
+              value={updateFormData.pincode}
+              onChange={handleChange}
+              name="pincode"
+              id=""
+            />{" "}
           </div>
           <div className="input-fields">
             <label htmlFor="">Phone no. *</label>
-            <input type="tel" name="" id="" />
+            <input type="tel" name="" id="" value={userDetails.phone_number} />
           </div>
         </form>
       </div>

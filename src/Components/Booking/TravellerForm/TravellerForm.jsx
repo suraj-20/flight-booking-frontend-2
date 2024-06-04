@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { IoBagRemoveSharp } from "react-icons/io5";
 
 const TravellerForm = () => {
+  const [passengerDetails, setPassengerDetails] = useState({
+    title: "",
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone_number: "",
+  });
+
+  const handleChange = (e) => {
+    setPassengerDetails({
+      ...passengerDetails,
+      [e.target.value]: e.target.name,
+    });
+  };
+
   return (
     <div className="traveller-details d-flex gap-2">
       <div className="details-heading">
@@ -16,29 +31,58 @@ const TravellerForm = () => {
       <div className="passenger-details">
         <form className="passenger-form d-grid">
           <div className="input-fields">
-            <label htmlFor="">Title</label>
-            <select name="" id="">
-              <option value="1">Title</option>
-              <option value="2">Mr.</option>
-              <option value="3">Mrs.</option>
-              <option value="4">Ms.</option>
+            <label htmlFor="title">Title</label>
+            <select
+              value={passengerDetails.title}
+              onChange={handleChange}
+              name="title"
+              id=""
+            >
+              <option value="Title">Title</option>
+              <option value="Mr.">Mr.</option>
+              <option value="Mrs.">Mrs.</option>
+              <option value="Ms.">Ms.</option>
             </select>
           </div>
           <div className="input-fields">
-            <label htmlFor="">First Name *</label>
-            <input type="text" name="" id="" />
+            <label htmlFor="first_name">First Name *</label>
+            <input
+              value={passengerDetails.first_name}
+              onChange={handleChange}
+              type="text"
+              name="first_name"
+              id=""
+            />
           </div>
           <div className="input-fields">
-            <label htmlFor="">Last Name *</label>
-            <input type="text" name="" id="" />
+            <label htmlFor="last_name">Last Name *</label>
+            <input
+              value={passengerDetails.last_name}
+              onChange={handleChange}
+              type="text"
+              name="last_name"
+              id=""
+            />
           </div>
           <div className="input-fields">
-            <label htmlFor="">Email Id *</label>
-            <input type="email" name="" id="" />
+            <label htmlFor="email">Email Id *</label>
+            <input
+              value={passengerDetails.email}
+              onChange={handleChange}
+              type="email"
+              name="email"
+              id=""
+            />
           </div>
           <div className="input-fields">
-            <label htmlFor="">Phone no. *</label>
-            <input type="tel" name="" id="" />
+            <label htmlFor="phone_number">Phone no. *</label>
+            <input
+              value={passengerDetails.phone_number}
+              onChange={handleChange}
+              type="tel"
+              name="phone_number"
+              id=""
+            />
           </div>
         </form>
       </div>
