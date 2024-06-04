@@ -1,14 +1,36 @@
 import React, { useState } from "react";
 import "./Hero.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { DatePicker } from "rsuite";
 
-const Hero = () => {
+const Hero = ({ flightDetails, setFligthDetails }) => {
   const [isOneWay, setIsOneWay] = useState(true);
-  const [numAdults, setNumAdults] = useState(1);
-  const [numChildren, setNumChildren] = useState(0);
-  const [numInfants, setNumInfants] = useState(0);
   const [showPassengerOption, setShowPassengerOption] = useState(false);
+  const navigate = useNavigate();
+
+  console.log(flightDetails);
+
+  const handleChange = (e) => {
+    setFligthDetails({ ...flightDetails, [e.target.name]: e.target.value });
+    // console.log(e.target.value);
+  };
+
+  const formatDate = (date) => {
+    if (!date) return "";
+    const year = date.getFullYear();
+    const month = `0${date.getMonth() + 1}`.slice(-2); // Add leading zero
+    const day = `0${date.getDate()}`.slice(-2); // Add leading zero
+    return `${year}-${month}-${day}`;
+  };
+
+  const handleDateChange = (date, name) => {
+    const formattedDate = formatDate(date);
+    setFligthDetails((prevDetails) => ({
+      ...prevDetails,
+      [name]: formattedDate,
+    }));
+    // console.log(date);
+  };
 
   const handleToggleFlightType = (value) => {
     setIsOneWay(value === "one-way");
@@ -18,19 +40,47 @@ const Hero = () => {
     setShowPassengerOption(!showPassengerOption);
   };
 
-  const handlePassengerChange = (type, increment) => {
-    switch (type) {
-      case "adults":
-        setNumAdults(Math.max(numAdults + increment, 0));
-        break;
-      case "children":
-        setNumChildren(Math.max(numChildren + increment, 0));
-        break;
-      case "infants":
-        setNumInfants(Math.max(numInfants + increment, 0));
-        break;
-      default:
-        break;
+  const handlePassengerChange = (type, change) => {
+    setFligthDetails((prevDetails) => {
+      const newCount = prevDetails.passenger[type] + change;
+      return {
+        ...prevDetails,
+        passenger: {
+          ...prevDetails.passenger,
+          [type]: newCount >= 0 ? newCount : 0, // Ensure value does not go below 0
+        },
+      };
+    });
+  };
+
+  const handleSubmit = async () => {
+    console.log("Flight searched");
+
+    try {
+      const response = await fetch(
+        `http://localhost:8000/api/v1/searchFlights`,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(flightDetails),
+        }
+      );
+      const responseData = await response.json();
+      console.log(responseData);
+
+      if (responseData.message) {
+        alert(responseData.message);
+        window.location.replace("/flightdetails");
+        // navigate("/flightdetails");
+      } else {
+        alert(responseData.message);
+      }
+    } catch (error) {
+      console.log({ flightDetails });
+      console.error("Error in searching flight", error);
     }
   };
 
@@ -65,31 +115,44 @@ const Hero = () => {
           <div className="input-text-area d-lg-flex d-grid align-items-start">
             <div className="col-2 input-field">
               <input
+                value={flightDetails?.origin}
+                onChange={handleChange}
                 style={{ borderBottomLeftRadius: "10px" }}
                 className="form-control custom-form-input"
                 placeholder="Origin"
                 type="text"
-                name=""
+                name="origin"
                 id=""
               />
             </div>
             <div className="col-2 input-field">
               <input
+                value={flightDetails?.destination}
+                onChange={handleChange}
                 className="form-control custom-form-input"
                 placeholder="Destination"
                 type="text"
-                name=""
+                name="destination"
                 id=""
               />
             </div>
             <div className="col-2 input-field">
               <DatePicker
+                name="departureDate"
+                // selected={new Date(flightDetails.departureDate)}
+                value={new Date(flightDetails.departureDate)}
+                onChange={(date) => handleDateChange(date, "departureDate")}
+                formatdate={"yyyy-MM-dd"}
                 placeholder="Departure Date"
                 className="form-control custom-date-input"
               />
             </div>
             <div className="col-2 input-field">
               <DatePicker
+                value={new Date(flightDetails.returnDate)}
+                onChange={(date) => handleDateChange(date, "returnDate")}
+                name="returnDate"
+                formatdate={"yyyy-MM-dd"}
                 placeholder="Return Date"
                 className="form-control custom-date-input"
                 disabled={isOneWay}
@@ -102,12 +165,9 @@ const Hero = () => {
               <input
                 style={{ position: "absolute" }}
                 onClick={handleToggleShowPassenger}
-                onChange={handlePassengerChange}
+                // onChange={handlePassengerChange}
                 className="form-control custom-form-input"
                 placeholder="1 Treveller(s), Economy"
-                type="text"
-                name=""
-                id=""
               />
               {showPassengerOption && (
                 <div className="passenger-options">
@@ -117,16 +177,16 @@ const Hero = () => {
                       <button
                         onClick={(e) => {
                           preventDefaultAction(e);
-                          handlePassengerChange("adults", -1);
+                          handlePassengerChange("adult", -1);
                         }}
                       >
                         -
                       </button>
-                      <span>{numAdults}</span>
+                      <span>{flightDetails.passenger.adult}</span>
                       <button
                         onClick={(e) => {
                           preventDefaultAction(e);
-                          handlePassengerChange("adults", 1);
+                          handlePassengerChange("adult", 1);
                         }}
                       >
                         +
@@ -144,7 +204,7 @@ const Hero = () => {
                       >
                         -
                       </button>
-                      <span>{numChildren}</span>
+                      <span>{flightDetails.passenger.children}</span>
                       <button
                         onClick={(e) => {
                           preventDefaultAction(e);
@@ -159,6 +219,9 @@ const Hero = () => {
                     <label>Infants:</label>
                     <div className="addOrSubBtn">
                       <button
+                        value={flightDetails.infants}
+                        onChange={handleChange}
+                        name="infants"
                         onClick={(e) => {
                           preventDefaultAction(e);
                           handlePassengerChange("infants", -1);
@@ -166,8 +229,11 @@ const Hero = () => {
                       >
                         -
                       </button>
-                      <span>{numInfants}</span>
+                      <span>{flightDetails.passenger.infants}</span>
                       <button
+                        value={flightDetails.infants}
+                        onChange={handleChange}
+                        name="infants"
                         onClick={(e) => {
                           preventDefaultAction(e);
                           handlePassengerChange("infants", 1);
@@ -181,11 +247,14 @@ const Hero = () => {
                     <select
                       className="dropdown-flight-class"
                       aria-label="Default select example"
+                      value={flightDetails.class_of_service}
+                      onChange={handleChange}
+                      name="class_of_service"
                     >
                       <option value="Economy">Economy</option>
-                      <option value="1">Premium Economy</option>
-                      <option value="2">Business</option>
-                      <option value="3">First</option>
+                      <option value="Premium Economy">Premium Economy</option>
+                      <option value="Business">Business</option>
+                      <option value="First">First</option>
                     </select>
                   </div>
                 </div>
@@ -197,6 +266,10 @@ const Hero = () => {
                   style={{ borderBottomRightRadius: "10px" }}
                   type="submit"
                   className="btn custom-search-btn"
+                  onClick={(e) => {
+                    preventDefaultAction(e);
+                    handleSubmit();
+                  }}
                 >
                   Search
                 </button>

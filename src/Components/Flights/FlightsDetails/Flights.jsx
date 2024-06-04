@@ -1,14 +1,22 @@
 import React from "react";
 import "./Flights.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Filter from "../FilterFlight/Filter";
 
 const Flights = () => {
+  // const location = useLocation();
+  // const { searchResults } = location.state || {};
+
+  // if (!searchResults) {
+  //   return <div>Flights not found.</div>;
+  // }
+
   return (
     <div className="filter-or-flight-container d-flex align-items-start justify-content-between">
       <div className="filter-container d-none d-lg-flex">
         <Filter />
       </div>
+      {/* <pre>{JSON.stringify(searchResults, null, 2)}</pre> */}
       <div className="flight-container d-flex gap-3">
         <div className="sorting-contents">
           <ul className="list-items d-none d-lg-flex justify-content-around">
@@ -41,7 +49,8 @@ const Flights = () => {
             </li>
             <li className="list-link">
               <p>
-                2h 50m<br /> 0 stop
+                2h 50m
+                <br /> 0 stop
               </p>
             </li>
             <li className="list-link">
