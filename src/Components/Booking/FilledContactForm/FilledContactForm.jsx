@@ -1,7 +1,7 @@
 import React from "react";
 import { MdContacts } from "react-icons/md";
 
-const FilledContactForm = () => {
+const FilledContactForm = ({updateFormData}) => {
   return (
     <div
       className="contact-information d-flex gap-2"
@@ -19,35 +19,39 @@ const FilledContactForm = () => {
             <span style={{ display: "block", fontWeight: "600" }}>
               First Name
             </span>
-            Suraj
+            {updateFormData.first_name}
           </div>
           <div className="col-6 col-md-4 col-lg-4 px-1 mb-3">
             <span style={{ display: "block", fontWeight: "600" }}>
               Last Name
             </span>
-            NA
+            {updateFormData.last_name}
           </div>
           <div className="col-12 col-md-4 col-lg-4 px-1 mb-3">
             <span style={{ display: "block", fontWeight: "600" }}>Email</span>
-            suraaj0015@gmail.com
+            {updateFormData.email}
           </div>
           <div className="col-6 col-md-4 col-lg-4 px-1 mb-3">
             <span style={{ display: "block", fontWeight: "600" }}>State</span>
-            Haryana
+            {updateFormData.state}
           </div>
           <div className="col-6 col-md-4 col-lg-4 px-1 mb-3">
             <span style={{ display: "block", fontWeight: "600" }}>City</span>
-            Gurgaon
+            {updateFormData.city}
           </div>
           <div className="col-6 col-md-4 col-lg-4 px-1 mb-3">
             <span style={{ display: "block", fontWeight: "600" }}>Country</span>
-            India
+            {updateFormData.country}
+          </div>
+          <div className="col-6 col-md-4 col-lg-4 px-1 mb-3">
+            <span style={{ display: "block", fontWeight: "600" }}>Pincode</span>
+            {updateFormData.pincode}
           </div>
           <div className="col-6 col-md-4 col-lg-4 px-1 mb-3">
             <span style={{ display: "block", fontWeight: "600" }}>
               Mobile No.
             </span>
-            8287146841
+            {updateFormData.phone_number}
           </div>
         </div>
       </div>

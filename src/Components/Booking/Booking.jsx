@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Booking.css";
 import { PiAirplaneTiltFill } from "react-icons/pi";
-
+import { updateInfoApiCall } from "../../Services/updateInfo";
 import ContactForm from "./ContactForm/ContactForm";
 import TravellerForm from "./TravellerForm/TravellerForm";
 import Discound from "./Discound/Discound";
@@ -12,8 +12,8 @@ import TravellerFilledForm from "./TravellerFilledForm/TravellerFilledForm";
 import FilledContactForm from "./FilledContactForm/FilledContactForm";
 // import { Link } from "react-router-dom";
 
-const Booking = ({ selectedFlight }) => {
-  console.log({ selectedFlight });
+const Booking = ({ selectedFlight, updateFormData , setUpdateFormData  }) => {
+
   const [showContent, setShowContent] = useState("page1");
 
   const handleToggleContent = (newContent) => {
@@ -134,7 +134,7 @@ const Booking = ({ selectedFlight }) => {
             {/* {showContent === "page2" && <TravellerFilledForm />} */}
           </div>
           <div className="contact-information-container">
-            {showContent === "page1" ? <ContactForm /> : <FilledContactForm />}
+            {showContent === "page1" ? <ContactForm updateFormData={updateFormData} setUpdateFormData={setUpdateFormData}/> : <FilledContactForm updateFormData={updateFormData} />}
           </div>
           {showContent === "page1" ? (
             ""
@@ -170,7 +170,10 @@ const Booking = ({ selectedFlight }) => {
             {showContent === "page1" && (
               <button
                 type="submit"
-                onClick={() => handleToggleContent("page2")}
+                onClick={() => {
+                  handleToggleContent("page2")
+                  updateInfoApiCall(updateFormData,setUpdateFormData)
+                }}
                 className="btn secondary-btn"
                 style={{ background: "#034", color: "white" }}
               >
