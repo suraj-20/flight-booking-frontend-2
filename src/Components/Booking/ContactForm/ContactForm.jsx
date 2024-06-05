@@ -26,7 +26,7 @@ const ContactForm = ({updateFormData,setUpdateFormData}) => {
 
   function fetchUserDetailApi() {
     try {
-      fetch(`http://localhost:8000/api/v1/user`, {
+      fetch(`${process.env.REACT_APP_BASE_URL}/api/v1/user`, {
         method: "GET",
         headers: {
           Authorization: `${localStorage.getItem("token")}`,

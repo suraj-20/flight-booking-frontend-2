@@ -8,7 +8,7 @@ const updateInfoApiCall = async (
 
     if (token) {
       const response = await fetch(
-        `http://localhost:8000/api/v1/user/updateInfo`,
+        `${process.env.REACT_APP_BASE_URL}/api/v1/user/updateInfo`,
         {
           method: "PUT",
           headers: {
@@ -54,7 +54,7 @@ const addPassengers = async (passengerDetails, setPassengerDetails) => {
       passengers: passengerDetails,
     };
     if (localStorage.getItem("token")) {
-      await fetch(` http://localhost:8000/api/v1/addPassengerDetails`, {
+      await fetch(` ${process.env.REACT_APP_BASE_URL}/api/v1/addPassengerDetails`, {
         method: "POST",
         headers: {
           Accept: "application/json",

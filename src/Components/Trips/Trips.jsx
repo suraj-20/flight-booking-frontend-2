@@ -7,7 +7,7 @@ const Trips = ({ userDetails }) => {
   useEffect(() => {
     async function fetchData() {
       const response = await fetch(
-        `http://localhost:8000/api/v1/getAllUserPrevFlight`,
+        `${process.env.REACT_APP_BASE_URL}/api/v1/getAllUserPrevFlight`,
         {
           method: "GET",
           headers: {
@@ -40,17 +40,15 @@ const Trips = ({ userDetails }) => {
               <th>Amount/Price</th>
             </tr>
 
-            {trips.map((trip) => (
-              <>
-                <tr>
-                  <td style={{ textTransform: "uppercase" }}>
-                    {trip.bookingId.slice(30)}
-                  </td>
-                  <td>{userDetails.first_name}</td>
-                  <td>{trip.bookingDate}</td>
-                  <td>INR {trip.amount}</td>
-                </tr>
-              </>
+            {trips.map((trip, index) => (
+              <tr key={index}>
+                <td style={{ textTransform: "uppercase" }}>
+                  {trip.bookingId.slice(30)}
+                </td>
+                <td>{userDetails.first_name}</td>
+                <td>{trip.bookingDate}</td>
+                <td>INR {trip.amount}</td>
+              </tr>
             ))}
           </table>
         </div>

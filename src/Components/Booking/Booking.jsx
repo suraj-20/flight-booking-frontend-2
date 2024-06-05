@@ -58,7 +58,7 @@ const Booking = ({
         passengerDetails,
       };
       const response = await fetch(
-        `http://localhost:8000/api/v1/createPayment`,
+        `${process.env.REACT_APP_BASE_URL}/api/v1/createPayment`,
         {
           method: "POST",
           headers: {

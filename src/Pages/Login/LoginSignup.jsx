@@ -24,7 +24,7 @@ const LoginSignup = ({ alert, setAlert }) => {
     try {
       let responseData;
       console.log(process.env.REACT_APP_BASE_URL);
-      await fetch(` http://localhost:8000/api/v1/user/register`, {
+      await fetch(` ${process.env.REACT_APP_BASE_URL}/api/v1/user/register`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -67,8 +67,8 @@ const LoginSignup = ({ alert, setAlert }) => {
     // console.log("User logged in", formData);
 
     let responseData;
-    // console.log(process.env.REACT_APP_BASE_URL);
-    await fetch(`http://localhost:8000/api/v1/user/login`, {
+    console.log(process.env.REACT_APP_BASE_URL);
+    await fetch(`${process.env.REACT_APP_BASE_URL}/api/v1/user/login`, {
       method: "POST",
       headers: {
         Accept: "application/json",
