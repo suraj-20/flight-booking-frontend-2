@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { IoBagRemoveSharp } from "react-icons/io5";
 
 const TravellerForm = ({

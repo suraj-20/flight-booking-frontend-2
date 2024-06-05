@@ -66,41 +66,43 @@ const Booking = ({
                 style={{ overflowX: "auto" }}
               >
                 <table style={{ width: "100%", border: "none" }}>
-                  <tr>
-                    <td className="d-flex gap-3">
-                      <img src="" alt="" width={50} height={50} />
-                      <h5>
-                        {selectedFlight.airline} <br />{" "}
-                        <p style={{ textTransform: "uppercase" }}>
-                          {selectedFlight.flight_number}
+                  <thead>
+                    <tr>
+                      <td className="d-flex gap-3">
+                        <img src="" alt="" width={50} height={50} />
+                        <h5>
+                          {selectedFlight.airline} <br />{" "}
+                          <p style={{ textTransform: "uppercase" }}>
+                            {selectedFlight.flight_number}
+                          </p>
+                        </h5>
+                      </td>
+                      <td>
+                        <p>
+                          {getTimeInHoursAndMin(selectedFlight.departure_date)}{" "}
+                          <br /> {selectedFlight.departure_location}
                         </p>
-                      </h5>
-                    </td>
-                    <td>
-                      <p>
-                        {getTimeInHoursAndMin(selectedFlight.departure_date)}{" "}
-                        <br /> {selectedFlight.departure_location}
-                      </p>
-                    </td>
-                    <td>
-                      <p>
-                        {getTimeInHoursAndMin(selectedFlight.arrival_date)}{" "}
-                        <br /> {selectedFlight.arrival_location}
-                      </p>
-                    </td>
-                    <td>
-                      <p>{`${calTimeDiff(
-                        selectedFlight.departure_date,
-                        selectedFlight.arrival_date
-                      )} hours`}</p>
-                    </td>
-                    <td>
-                      {" "}
-                      <h6
-                        style={{ color: "red" }}
-                      >{`₹ ${selectedFlight.price}`}</h6>
-                    </td>
-                  </tr>
+                      </td>
+                      <td>
+                        <p>
+                          {getTimeInHoursAndMin(selectedFlight.arrival_date)}{" "}
+                          <br /> {selectedFlight.arrival_location}
+                        </p>
+                      </td>
+                      <td>
+                        <p>{`${calTimeDiff(
+                          selectedFlight.departure_date,
+                          selectedFlight.arrival_date
+                        )} hours`}</p>
+                      </td>
+                      <td>
+                        {" "}
+                        <h6
+                          style={{ color: "red" }}
+                        >{`₹ ${selectedFlight.price}`}</h6>
+                      </td>
+                    </tr>
+                  </thead>
                 </table>
                 {/* <ul className="list-items d-flex justify-content-between">
                   <li className="list-link d-flex gap-2">
@@ -214,7 +216,10 @@ const Booking = ({
         </div>
         <div className="right-content-container d-flex gap-3">
           <div className="fare-breakup-container">
-            <FareBreakup />
+            <FareBreakup
+              flightDetails={flightDetails}
+              selectedFlight={selectedFlight}
+            />
           </div>
           <div className="discount-offer-container">
             <Discound />

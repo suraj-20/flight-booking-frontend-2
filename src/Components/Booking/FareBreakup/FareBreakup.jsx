@@ -1,7 +1,19 @@
 import React from "react";
 import { IoReceiptSharp } from "react-icons/io5";
 
-const FareBreakup = () => {
+const FareBreakup = ({ flightDetails, selectedFlight }) => {
+  console.log(flightDetails.total_Passenger);
+  console.log(selectedFlight);
+
+  const totalFare = () => {
+    let total_amount = Number(
+      flightDetails.total_Passenger * selectedFlight.price
+    );
+    console.log(total_amount);
+
+    return total_amount;
+  };
+
   return (
     <>
       <div className="details-heading" style={{ padding: "1rem" }}>
@@ -17,23 +29,21 @@ const FareBreakup = () => {
           </p>
           <label htmlFor="">Passengers</label>
         </div>
-        <div className="passenger-type">
-          <h6>Adult: 1</h6>
-        </div>
+        <div className="passenger-type">{/* <h6>Adult: 1</h6> */}</div>
         <div className="price-divide d-flex">
           <div className="base-fare d-flex align-items-center justify-content-between">
             <h5>Base Fare</h5>
-            <p>₹ 3500</p>
+            <p>{`₹ ${totalFare()}`}</p>
           </div>
           <hr />
           <div className="taxes d-flex align-items-center justify-content-between">
             <h5>Taxes & Fees</h5>
-            <p>₹ 500</p>
+            <p>₹ 0</p>
           </div>
           <hr />
           <div className="total-fare d-flex align-items-center justify-content-between">
             <h5>Total Payable</h5>
-            <p>₹ 4000</p>
+            <p>{`₹ ${totalFare()}`}</p>
           </div>
         </div>
       </div>

@@ -8,7 +8,7 @@ import Footer from "./Components/Home/Footer/Footer.jsx";
 import LoginSignup from "./Pages/Login/LoginSignup.jsx";
 import MyTrips from "./Pages/MyTrips/MyTrips.jsx";
 import PaymentGateway from "./Pages/PaymentGateway/PaymentGateway.jsx";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function App() {
   const [flightDetails, setFligthDetails] = useState({

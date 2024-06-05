@@ -29,6 +29,7 @@ const Flights = ({ searchResults, setSelectedFlight }) => {
 
   const handleSelectedFlight = (flight) => {
     setSelectedFlight(flight);
+    console.log(flight);
     navigate("/bookingdetails");
   };
 
