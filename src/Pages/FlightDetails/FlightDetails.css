@@ -1,8 +1,14 @@
+.flight-details-page .upper-content-container {
+  background: #034;
+  height: 15vh;
+  padding: 2rem 0;
+}
+
 .modify_section {
-    padding: 2rem 0;
-    background: #034;
+  padding: 2rem 0;
+  background: #034;
 }
 
 .filter_section_or_flights_details {
-    padding: 2rem 0;
+  padding: 2rem 0;
 }

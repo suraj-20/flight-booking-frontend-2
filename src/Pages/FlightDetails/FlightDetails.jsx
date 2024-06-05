@@ -13,6 +13,7 @@ const FlightDetails = ({ searchResults, setSelectedFlight }) => {
           setFligthDetails={setFligthDetails}
         />
       </section> */}
+      <div className="upper-content-container"></div>
       <section className="filter_section_or_flights_details">
         <Flights
           searchResults={searchResults}

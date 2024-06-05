@@ -1,11 +1,9 @@
-import React from 'react'
+import React from "react";
 
 const Filter = () => {
   return (
-    <div>
-      Filter
-    </div>
-  )
-}
+    <div style={{ padding: "0.5rem" }}>ADVERTISEMENT TO BEE DISPLAY HERE</div>
+  );
+};
 
-export default Filter
+export default Filter;
