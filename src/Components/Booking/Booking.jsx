@@ -48,6 +48,35 @@ const Booking = ({
     return formattedTime;
   };
 
+  const makePaymentApiCall = async () => {
+
+    try {
+      
+      let body = {
+        selectedFlight,
+        passengerDetails
+      }
+      const response = await fetch(
+        `http://localhost:8000/api/v1/createPayment`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: localStorage.getItem("token"),
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body),
+        }
+      );
+
+      const responseData = await response.json();
+      console.log(responseData)
+
+    } catch (error) {
+      console.error("Error in make payment", error);
+    }
+
+  };
+
   return (
     <div className="booking-container ">
       <div className="upper-content-container"></div>
@@ -204,7 +233,10 @@ const Booking = ({
               <Link to={"/paymentgateway"}>
                 <button
                   type="submit"
-                  onClick={() => handleToggleContent("page1")}
+                  onClick={() => {
+                    handleToggleContent("page1")
+                    makePaymentApiCall()
+                  }}
                   className="btn secondary-btn"
                   style={{ background: "#034", color: "white" }}
                 >

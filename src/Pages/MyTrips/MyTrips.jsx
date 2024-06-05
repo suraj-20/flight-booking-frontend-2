@@ -2,11 +2,11 @@ import React from "react";
 import "./MyTrips.css";
 import Trips from "../../Components/Trips/Trips";
 
-const MyTrips = () => {
+const MyTrips = ({userDetails}) => {
   return (
     <div className="MyTrip-page">
       <section className="mytrips-section">
-        <Trips />
+        <Trips userDetails={userDetails} />
       </section>
     </div>
   );

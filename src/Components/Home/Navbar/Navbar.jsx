@@ -7,9 +7,8 @@ import { MdEmail } from "react-icons/md";
 import { FaFilePdf } from "react-icons/fa";
 import { FaUserCircle } from "react-icons/fa";
 
-const Navbar = () => {
+const Navbar = ({userDetails,setUserDetails}) => {
   
-  const [userDetails, setUserDetails] = useState("");
 
   const fetchUserDetail = async () => {
     if (localStorage.getItem("token")) {
