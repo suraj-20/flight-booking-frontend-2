@@ -56,7 +56,7 @@ const Flights = ({ searchResults, setSelectedFlight }) => {
           <div key={index} className="flight-card-container">
             <ul className="list-items d-lg-flex d-grid justify-content-between">
               <li className="list-link d-flex align-items-center gap-2">
-                <img src="" alt="" width={50} height={50} />
+                <img src={`${flight.img}`} alt="" width={50} height={50} />
                 <h6>
                   {flight.airline} <br />{" "}
                   <p style={{ textTransform: "uppercase" }}>

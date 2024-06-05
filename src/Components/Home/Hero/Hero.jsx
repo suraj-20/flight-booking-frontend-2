@@ -288,7 +288,7 @@ const Hero = ({
                       <option value="Economy">Economy</option>
                       <option value="Premium Economy">Premium Economy</option>
                       <option value="Business">Business</option>
-                      <option value="First">First</option>
+                      <option value="First Class">First Class</option>
                     </select>
                   </div>
                 </div>

@@ -121,7 +121,12 @@ const Booking = ({
                   <thead>
                     <tr>
                       <td className="d-flex gap-3">
-                        <img src="" alt="" width={50} height={50} />
+                        <img
+                          src={`${selectedFlight.img}`}
+                          alt=""
+                          width={50}
+                          height={50}
+                        />
                         <h5>
                           {selectedFlight.airline} <br />{" "}
                           <p style={{ textTransform: "uppercase" }}>

@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { MdContacts } from "react-icons/md";
 
-const ContactForm = ({updateFormData,setUpdateFormData}) => {
-
-
+const ContactForm = ({ updateFormData, setUpdateFormData }) => {
   const [userDetails, setUserDetails] = useState("");
 
   const handleChange = (e) => {
     setUpdateFormData({ ...updateFormData, [e.target.name]: e.target.value });
     // console.log(e.target.value);
   };
-
 
   // const updateUserDetails = (async) => {
   //   if (localStorage.getItem("token")) {
@@ -58,9 +55,7 @@ const ContactForm = ({updateFormData,setUpdateFormData}) => {
         </h4>
       </div>
       <div className="passenger-details">
-        <form
-          className="passenger-form contact-form d-grid"
-        >
+        <form className="passenger-form contact-form d-grid">
           <div className="input-fields">
             <label htmlFor="">First Name *</label>
             <input type="text" name="" id="" value={userDetails.first_name} />
@@ -76,7 +71,11 @@ const ContactForm = ({updateFormData,setUpdateFormData}) => {
           <div className="input-fields">
             <label htmlFor="country">Country</label>
             <select
-              value={updateFormData.country}
+              value={
+                userDetails.country
+                  ? userDetails.country
+                  : updateFormData.country
+              }
               onChange={handleChange}
               name="country"
               id=""
@@ -85,9 +84,11 @@ const ContactForm = ({updateFormData,setUpdateFormData}) => {
             </select>
           </div>
           <div className="input-fields">
-            <label htmlFor="">State</label>
+            <label htmlFor="state">State</label>
             <select
-              value={updateFormData.state}
+              value={
+                userDetails.state ? userDetails.state : updateFormData.state
+              }
               onChange={handleChange}
               name="state"
               id=""
@@ -131,7 +132,7 @@ const ContactForm = ({updateFormData,setUpdateFormData}) => {
             <label htmlFor="">City *</label>
             <input
               type="text"
-              value={updateFormData.city}
+              value={userDetails.city ? userDetails.city : updateFormData.city}
               onChange={handleChange}
               name="city"
               id=""
