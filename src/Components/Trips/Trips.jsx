@@ -25,6 +25,12 @@ const Trips = ({ userDetails }) => {
     fetchData();
   }, []);
 
+  
+  const getTotalAmount = (flight) => {
+    console.log(flight)
+    return Number(flight.passengers.length*flight.amount)
+  }
+
   return (
     <div className="trip-section-container">
       <div className="trip-container container">
@@ -47,7 +53,7 @@ const Trips = ({ userDetails }) => {
                 </td>
                 <td>{userDetails.first_name}</td>
                 <td>{trip.bookingDate}</td>
-                <td>INR {trip.amount}</td>
+                <td>INR {getTotalAmount(trip)}</td>
               </tr>
             ))}
           </table>
