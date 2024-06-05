@@ -11,6 +11,8 @@ import PaymentGateway from "./Pages/PaymentGateway/PaymentGateway.jsx";
 import { useState } from "react";
 
 function App() {
+  const [userDetails, setUserDetails] = useState("");
+
   const [flightDetails, setFligthDetails] = useState({
     origin: "",
     destination: "",
@@ -76,7 +78,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Navbar />
+      <Navbar  userDetails={userDetails} setUserDetails={setUserDetails}/>
       <Routes>
         <Route
           path="/"
@@ -89,7 +91,7 @@ function App() {
           }
         ></Route>
         <Route path="/login" element={<LoginSignup />}></Route>
-        <Route path="/mytrips" element={<MyTrips />}></Route>
+        <Route path="/mytrips" element={<MyTrips userDetails={userDetails} />}></Route>
         <Route
           path="/flightdetails"
           element={
@@ -109,6 +111,7 @@ function App() {
               selectedFlight={selectedFlight}
               updateFormData={updateFormData}
               setUpdateFormData={setUpdateFormData}
+              
             />
           }
         ></Route>
