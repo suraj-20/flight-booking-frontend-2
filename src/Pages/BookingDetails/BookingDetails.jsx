@@ -9,6 +9,8 @@ const BookingDetails = ({
   flightDetails,
   passengerDetails,
   setPassengerDetails,
+  alert,
+  setAlert,
 }) => {
   return (
     <div className="booking_section">
@@ -19,6 +21,8 @@ const BookingDetails = ({
         updateFormData={updateFormData}
         setUpdateFormData={setUpdateFormData}
         flightDetails={flightDetails}
+        alert={alert}
+        setAlert={setAlert}
       />
     </div>
   );

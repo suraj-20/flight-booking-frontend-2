@@ -2,8 +2,15 @@ import React, { useState } from "react";
 import "./Hero.css";
 import { Link, useNavigate } from "react-router-dom";
 import { DatePicker } from "rsuite";
+import Alert from "../../../Services/Alert";
 
-const Hero = ({ flightDetails, setFligthDetails, setSearchResults }) => {
+const Hero = ({
+  flightDetails,
+  setFligthDetails,
+  setSearchResults,
+  alert,
+  setAlert,
+}) => {
   const [isOneWay, setIsOneWay] = useState(true);
   const [showPassengerOption, setShowPassengerOption] = useState(false);
   const navigate = useNavigate();
@@ -81,21 +88,38 @@ const Hero = ({ flightDetails, setFligthDetails, setSearchResults }) => {
       // console.log(responseData);
 
       if (responseData.message) {
-        alert(responseData.message);
+        setAlert({
+          message: "Data submitted successfully",
+          type: "success",
+          visible: true,
+        });
         // window.location.replace("/flightdetails");
         setSearchResults(responseData.fliterFlight);
         navigate("/flightdetails");
       } else {
-        alert(responseData.message);
+        setAlert({
+          message: responseData.message,
+          type: "sucess",
+          visible: true,
+        });
       }
     } catch (error) {
-      console.log({ flightDetails });
+      // console.log({ flightDetails });
+      setAlert({
+        message: "Error submitting data: " + error.message,
+        type: "error",
+        visible: true,
+      });
       console.error("Error in searching flight", error);
     }
   };
 
   const preventDefaultAction = (e) => {
     e.preventDefault();
+  };
+
+  const closeAlert = () => {
+    setAlert({ ...alert, visible: false });
   };
 
   return (
@@ -288,6 +312,14 @@ const Hero = ({ flightDetails, setFligthDetails, setSearchResults }) => {
           </div>
         </div>
       </div>
+      {alert.visible && (
+        <Alert
+          message={alert.message}
+          type={alert.type}
+          onClose={closeAlert}
+          duration={5000}
+        />
+      )}
     </div>
   );
 };

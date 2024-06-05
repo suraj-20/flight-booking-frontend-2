@@ -1,6 +1,6 @@
 import React from "react";
 import "./Flights.css";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Filter from "../FilterFlight/Filter";
 
 const Flights = ({ searchResults, setSelectedFlight }) => {
@@ -29,7 +29,7 @@ const Flights = ({ searchResults, setSelectedFlight }) => {
 
   const handleSelectedFlight = (flight) => {
     setSelectedFlight(flight);
-    console.log(flight);
+    // console.log(flight);
     navigate("/bookingdetails");
   };
 

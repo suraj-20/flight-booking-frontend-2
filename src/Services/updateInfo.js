@@ -1,24 +1,48 @@
-const updateInfoApiCall = async (updateFormData, setUpdateFormData) => {
+const updateInfoApiCall = async (
+  updateFormData,
+  setUpdateFormData,
+  setAlert
+) => {
   try {
-    if (localStorage.getItem("token")) {
-      // console.log(process.env.REACT_APP_BASE_URL);
-      await fetch(` http://localhost:8000/api/v1/user/updateInfo`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `${localStorage.getItem("token")}`,
-        },
-        body: JSON.stringify(updateFormData),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          setUpdateFormData(data?.updatedUser);
-        })
-        .catch((error) => console.log(error));
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      const response = await fetch(
+        `http://localhost:8000/api/v1/user/updateInfo`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+          body: JSON.stringify(updateFormData),
+        }
+      );
+
+      const responseData = await response.json();
+
+      if (response.ok) {
+        setUpdateFormData(responseData?.updatedUser);
+        setAlert({
+          message: "Data submitted successfully " + responseData.message,
+          type: "success",
+          visible: true,
+        });
+      } else {
+        setAlert({
+          message: responseData.message,
+          type: "error",
+          visible: true,
+        });
+      }
     }
   } catch (error) {
-    console.error("Error in user signed in.", error);
+    console.error("Error in updating user info.", error);
+    setAlert({
+      message: "An error occurred while updating the information.",
+      type: "error",
+      visible: true,
+    });
   }
 };
 

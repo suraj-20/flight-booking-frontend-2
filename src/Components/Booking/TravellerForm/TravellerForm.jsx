@@ -6,7 +6,7 @@ const TravellerForm = ({
   passengerDetails,
   setPassengerDetails,
 }) => {
-  console.log({ flightDetails });
+  // console.log({ flightDetails });
 
   useEffect(() => {
     // Create an array of objects based on the numberOfPassengers

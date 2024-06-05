@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./Trips.css";
 
-const Trips = ({userDetails}) => {
+const Trips = ({ userDetails }) => {
+  const [trips, setTrips] = useState([]);
 
-  const [trips, setTrips] = useState([])
-
-  useEffect(()=>{
-
-    async function fetchData(){
-
+  useEffect(() => {
+    async function fetchData() {
       const response = await fetch(
         `http://localhost:8000/api/v1/getAllUserPrevFlight`,
         {
@@ -16,17 +13,17 @@ const Trips = ({userDetails}) => {
           headers: {
             Authorization: localStorage.getItem("token"),
             "Content-Type": "application/json",
-          }
+          },
         }
       );
 
-      const res = await response.json()
-      console.log(res.filteredBookings)
-      setTrips(res.filteredBookings)
+      const res = await response.json();
+      console.log(res.filteredBookings);
+      setTrips(res.filteredBookings);
     }
 
-    fetchData()
-  },[])
+    fetchData();
+  }, []);
 
   return (
     <div className="trip-section-container">
@@ -43,21 +40,18 @@ const Trips = ({userDetails}) => {
               <th>Amount/Price</th>
             </tr>
 
-            {
-              trips.map((trip)=>
+            {trips.map((trip) => (
               <>
-              <tr>
-              <td>{trip.bookingId.slice(20)}</td>
-              <td>{userDetails.first_name}</td>
-              <td>{trip.bookingDate}</td>
-              <td>INR {trip.amount}</td>
-              </tr>
-
+                <tr>
+                  <td style={{ textTransform: "uppercase" }}>
+                    {trip.bookingId.slice(30)}
+                  </td>
+                  <td>{userDetails.first_name}</td>
+                  <td>{trip.bookingDate}</td>
+                  <td>INR {trip.amount}</td>
+                </tr>
               </>
-              
-            )
-            }
-
+            ))}
           </table>
         </div>
       </div>

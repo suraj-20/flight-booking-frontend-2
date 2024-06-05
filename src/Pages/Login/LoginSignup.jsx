@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import "./LoginSignup.css";
 import image from "../../Assets/signup-OCG-APNN.svg";
 import { Link } from "react-router-dom";
+import Alert from "../../Services/Alert";
 
-const LoginSignup = () => {
+const LoginSignup = ({ alert, setAlert }) => {
   const [state, setState] = useState("Login");
   const [formData, setFormData] = useState({
     first_name: "",
@@ -37,12 +38,27 @@ const LoginSignup = () => {
 
       if (responseData.message) {
         localStorage.setItem("token", responseData.token);
-        alert(responseData.message);
+        setAlert({
+          message: "Data submitted successfully " + responseData.message,
+          type: "success",
+          visible: true,
+        });
+        // alert(responseData.message);
         window.location.replace("/login");
       } else {
-        alert(responseData.message);
+        setAlert({
+          message: responseData.message,
+          type: "error",
+          visible: true,
+        });
+        // alert(responseData.message);
       }
     } catch (error) {
+      setAlert({
+        message: "Error submitting data: " + error.message,
+        type: "error",
+        visible: true,
+      });
       console.error("Error in user signed in.", error);
     }
   };
@@ -69,15 +85,27 @@ const LoginSignup = () => {
 
     if (responseData.user) {
       localStorage.setItem("token", responseData.token);
-      alert(responseData.message);
+      setAlert({
+        message: "Data submitted successfully " + responseData.message,
+        type: "success",
+        visible: true,
+      });
       window.location.replace("/");
     } else {
-      alert(responseData.message);
+      setAlert({
+        message: responseData.message,
+        type: "error",
+        visible: true,
+      });
     }
   };
 
   if (!signup) return <div>Loading...</div>;
   if (!login) return <div>Loading...</div>;
+
+  const closeAlert = () => {
+    setAlert({ ...alert, visible: false });
+  };
 
   return (
     <div className="login-container">
@@ -215,6 +243,14 @@ const LoginSignup = () => {
           </div>
         </div>
       </div>
+      {alert.visible && (
+        <Alert
+          message={alert.message}
+          type={alert.type}
+          onClose={closeAlert}
+          duration={5000}
+        />
+      )}
     </div>
   );
 };

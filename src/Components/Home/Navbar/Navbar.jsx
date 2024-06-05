@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 import logo from "../../../Assets/wowfare-blue.svg";
@@ -7,9 +7,7 @@ import { MdEmail } from "react-icons/md";
 import { FaFilePdf } from "react-icons/fa";
 import { FaUserCircle } from "react-icons/fa";
 
-const Navbar = ({userDetails,setUserDetails}) => {
-  
-
+const Navbar = ({ userDetails, setUserDetails }) => {
   const fetchUserDetail = async () => {
     if (localStorage.getItem("token")) {
       fetchUserDetailApi();

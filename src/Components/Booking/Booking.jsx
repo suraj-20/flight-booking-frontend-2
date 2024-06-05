@@ -10,6 +10,7 @@ import FareBreakup from "./FareBreakup/FareBreakup";
 import { Link } from "react-router-dom";
 import TravellerFilledForm from "./TravellerFilledForm/TravellerFilledForm";
 import FilledContactForm from "./FilledContactForm/FilledContactForm";
+import Alert from "../../Services/Alert";
 // import { Link } from "react-router-dom";
 
 const Booking = ({
@@ -19,6 +20,8 @@ const Booking = ({
   flightDetails,
   passengerDetails,
   setPassengerDetails,
+  alert,
+  setAlert,
 }) => {
   const [showContent, setShowContent] = useState("page1");
 
@@ -49,13 +52,11 @@ const Booking = ({
   };
 
   const makePaymentApiCall = async () => {
-
     try {
-      
       let body = {
         selectedFlight,
-        passengerDetails
-      }
+        passengerDetails,
+      };
       const response = await fetch(
         `http://localhost:8000/api/v1/createPayment`,
         {
@@ -69,12 +70,34 @@ const Booking = ({
       );
 
       const responseData = await response.json();
-      console.log(responseData)
 
+      if (responseData.message) {
+        setAlert({
+          message: "Payment successfully ",
+          type: "success",
+          visible: true,
+        });
+        window.location.replace("/mytrips");
+      } else {
+        setAlert({
+          message: responseData.message,
+          type: "error",
+          visible: true,
+        });
+      }
+      // console.log(responseData);
     } catch (error) {
+      setAlert({
+        message: "Error submitting data: " + error.message,
+        type: "error",
+        visible: true,
+      });
       console.error("Error in make payment", error);
     }
+  };
 
+  const closeAlert = () => {
+    setAlert({ ...alert, visible: false });
   };
 
   return (
@@ -133,32 +156,6 @@ const Booking = ({
                     </tr>
                   </thead>
                 </table>
-                {/* <ul className="list-items d-flex justify-content-between">
-                  <li className="list-link d-flex gap-2">
-                    <img src="" alt="" width={50} height={50} />
-                    <h5>
-                      IndiGo <br /> <p>SG-4345</p>
-                    </h5>
-                  </li>
-                  <li className="list-link">
-                    <p>
-                      23:00 <br /> New Delhi
-                    </p>
-                  </li>
-                  <li className="list-link">
-                    <p>
-                      23:00 <br /> New Delhi
-                    </p>
-                  </li>
-                  <li className="list-link">
-                    <p>
-                      23:00 <br /> 0 stop
-                    </p>
-                  </li>
-                  <li className="list-link">
-                    <h6 style={{ color: "red" }}>₹ 3500</h6>
-                  </li>
-                </ul> */}
               </div>
             </div>
           </div>
@@ -184,7 +181,7 @@ const Booking = ({
               <FilledContactForm updateFormData={updateFormData} />
             )}
           </div>
-          {showContent === "page1" ? (
+          {/* {showContent === "page1" ? (
             ""
           ) : (
             <div className="checkbox d-flex gap-3 ">
@@ -204,7 +201,7 @@ const Booking = ({
                 </p>
               </label>
             </div>
-          )}
+          )} */}
           <div className="previous-or-submit-btn d-flex align-items-center justify-content-center gap-3">
             <Link to={"/flightdetails"}>
               <button
@@ -220,8 +217,16 @@ const Booking = ({
                 type="submit"
                 onClick={() => {
                   handleToggleContent("page2");
-                  updateInfoApiCall(updateFormData, setUpdateFormData);
-                  addPassengers(passengerDetails, setPassengerDetails);
+                  updateInfoApiCall(
+                    updateFormData,
+                    setUpdateFormData,
+                    setAlert
+                  );
+                  addPassengers(
+                    passengerDetails,
+                    setPassengerDetails,
+                    setAlert
+                  );
                 }}
                 className="btn secondary-btn"
                 style={{ background: "#034", color: "white" }}
@@ -230,19 +235,17 @@ const Booking = ({
               </button>
             )}
             {showContent === "page2" && (
-              <Link to={"/paymentgateway"}>
-                <button
-                  type="submit"
-                  onClick={() => {
-                    handleToggleContent("page1")
-                    makePaymentApiCall()
-                  }}
-                  className="btn secondary-btn"
-                  style={{ background: "#034", color: "white" }}
-                >
-                  Make Payment
-                </button>
-              </Link>
+              <button
+                type="submit"
+                onClick={() => {
+                  handleToggleContent("page1");
+                  makePaymentApiCall();
+                }}
+                className="btn secondary-btn"
+                style={{ background: "#034", color: "white" }}
+              >
+                Make Payment
+              </button>
             )}
           </div>
         </div>
@@ -261,6 +264,14 @@ const Booking = ({
           </div>
         </div>
       </div>
+      {alert.visible && (
+        <Alert
+          message={alert.message}
+          type={alert.type}
+          onClose={closeAlert}
+          duration={5000}
+        />
+      )}
     </div>
   );
 };

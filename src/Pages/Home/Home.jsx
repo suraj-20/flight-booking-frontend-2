@@ -5,15 +5,22 @@ import SubHeader from "../../Components/Home/SubHeader/SubHeader";
 import Card from "../../Components/Home/Card/Card";
 import ReviewSection from "../../Components/Home/ReviewsSection/ReviewSection";
 
-const Home = ({ flightDetails, setFligthDetails, setSearchResults }) => {
-
-    return (
+const Home = ({
+  flightDetails,
+  setFligthDetails,
+  setSearchResults,
+  alert,
+  setAlert,
+}) => {
+  return (
     <div className="home_page">
       <section className="hero_section">
         <Hero
           flightDetails={flightDetails}
           setFligthDetails={setFligthDetails}
           setSearchResults={setSearchResults}
+          alert={alert}
+          setAlert={setAlert}
         />
       </section>
       <section className="subHeader-section">

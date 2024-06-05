@@ -7,7 +7,7 @@ import Navbar from "./Components/Home/Navbar/Navbar.jsx";
 import Footer from "./Components/Home/Footer/Footer.jsx";
 import LoginSignup from "./Pages/Login/LoginSignup.jsx";
 import MyTrips from "./Pages/MyTrips/MyTrips.jsx";
-import PaymentGateway from "./Pages/PaymentGateway/PaymentGateway.jsx";
+// import PaymentGateway from "./Pages/PaymentGateway/PaymentGateway.jsx";
 import { useState } from "react";
 
 function App() {
@@ -76,9 +76,11 @@ function App() {
     },
   ]);
 
+  const [alert, setAlert] = useState({ message: "", type: "", visible: false });
+
   return (
     <BrowserRouter>
-      <Navbar  userDetails={userDetails} setUserDetails={setUserDetails}/>
+      <Navbar userDetails={userDetails} setUserDetails={setUserDetails} />
       <Routes>
         <Route
           path="/"
@@ -87,11 +89,19 @@ function App() {
               flightDetails={flightDetails}
               setFligthDetails={setFligthDetails}
               setSearchResults={setSearchResults}
+              alert={alert}
+              setAlert={setAlert}
             />
           }
         ></Route>
-        <Route path="/login" element={<LoginSignup />}></Route>
-        <Route path="/mytrips" element={<MyTrips userDetails={userDetails} />}></Route>
+        <Route
+          path="/login"
+          element={<LoginSignup alert={alert} setAlert={setAlert} />}
+        ></Route>
+        <Route
+          path="/mytrips"
+          element={<MyTrips userDetails={userDetails} />}
+        ></Route>
         <Route
           path="/flightdetails"
           element={
@@ -111,11 +121,12 @@ function App() {
               selectedFlight={selectedFlight}
               updateFormData={updateFormData}
               setUpdateFormData={setUpdateFormData}
-              
+              alert={alert}
+              setAlert={setAlert}
             />
           }
         ></Route>
-        <Route path="/paymentgateway" element={<PaymentGateway />}></Route>
+        {/* <Route path="/paymentgateway" element={<PaymentGateway />}></Route> */}
       </Routes>
       <Footer />
     </BrowserRouter>
